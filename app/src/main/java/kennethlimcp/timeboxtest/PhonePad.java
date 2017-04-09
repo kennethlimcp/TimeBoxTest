@@ -1,10 +1,32 @@
 package kennethlimcp.timeboxtest;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by kennethlimcp on 09/Apr/2017.
  */
 
 public class PhonePad {
+    private List<char[]> numberToCharList;
+
+    public PhonePad() {
+        numberToCharList = new LinkedList();
+
+        numberToCharList.add(0,new char[]{});
+        numberToCharList.add(1,new char[]{});
+        numberToCharList.add(2,new char[]{'a','b','c'});
+        numberToCharList.add(3,new char[]{'d','e','f'});
+        numberToCharList.add(4,new char[]{'g','h','i'});
+        numberToCharList.add(5,new char[]{'j','k','l'});
+        numberToCharList.add(6,new char[]{'m','n','o'});
+        numberToCharList.add(7,new char[]{'p','q','r','s'});
+        numberToCharList.add(8,new char[]{'t','u','v'});
+        numberToCharList.add(9,new char[]{'w','x','y','z'});
+    }
+
      public int getPressesFromChar(char input) {
          int numericValue = (int) Character.toLowerCase(input) - 0x61;
 
@@ -35,6 +57,8 @@ public class PhonePad {
      }
 
      public String getNumberRepOfWord(String s) {
+         s = s.toLowerCase();
+
          String retStr = "";
 
          for(char c : s.toCharArray()) {
@@ -64,5 +88,44 @@ public class PhonePad {
              returnValue = 9;
 
          return returnValue;
+     }
+
+     public String[] getWordCombisFromNum(String number) {
+         List<char[]> numArray = new LinkedList();
+
+         // (c - 0x30) to remove ascii offset of 0
+         for(char c: number.toCharArray()) {
+             numArray.add(numberToCharList.get(c-0x30));
+         }
+
+         return new String[]{};
+     }
+
+
+     public List getPossibleWordsFromNum(String number) {
+         List<String> words = new LinkedList<String>();
+
+         String wordsFile = ("/Users/kennethlimcp/Desktop/" +
+                 "TimeBoxTest/app/src/main/java/kennethlimcp/timeboxtest/words.txt");
+         BufferedReader reader;
+         FileReader fr;
+         String word = "";
+
+         try {
+             fr = new FileReader(wordsFile);
+             reader = new BufferedReader(fr);
+
+             while ((word = reader.readLine()) != null) {
+                 if(number.equals(getNumberRepOfWord(word))) {
+                     words.add(word);
+                 }
+             }
+             fr.close();
+
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
+
+         return words;
      }
 }

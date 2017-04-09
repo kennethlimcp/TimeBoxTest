@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -82,5 +84,27 @@ public class PhonePadTest {
     public void getNumberRepOfWord() {
         assertEquals("43556", pp.getNumberRepOfWord("hello"));
         assertEquals("23456789", pp.getNumberRepOfWord("behknruy"));
+        assertEquals("9", pp.getNumberRepOfWord("Z"));
+    }
+
+    @Test
+    public void testGetPossibleWordsFromNum() {
+        List l1 = pp.getPossibleWordsFromNum("2355");
+
+        assertEquals(2, l1.size());
+        assertTrue("bell",l1.contains("bell"));
+        assertTrue("cell",l1.contains("cell"));
+
+        List l2 = pp.getPossibleWordsFromNum("2");
+        assertEquals(6, l2.size());
+        assertTrue("A",l2.contains("A"));
+        assertTrue("a",l2.contains("a"));
+        assertTrue("B",l2.contains("B"));
+        assertTrue("b",l2.contains("b"));
+        assertTrue("C",l2.contains("C"));
+        assertTrue("c",l2.contains("c"));
+
+        List l3 = pp.getPossibleWordsFromNum("0");
+        assertEquals(0, l3.size());
     }
 }
