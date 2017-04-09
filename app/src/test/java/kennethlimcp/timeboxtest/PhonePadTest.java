@@ -25,16 +25,32 @@ public class PhonePadTest {
     @Test
     public void testGetNumberFromChar() {
         assertEquals(1, pp.getNumberFromChar('a'));
-        assertEquals(2, pp.getNumberFromChar('e'));
-        assertEquals(2, pp.getNumberFromChar('h'));
-        assertEquals(2, pp.getNumberFromChar('n'));
-        assertEquals(3, pp.getNumberFromChar('r'));
+        assertEquals(3, pp.getNumberFromChar('c'));
+
+        assertEquals(1, pp.getNumberFromChar('d'));
+        assertEquals(3, pp.getNumberFromChar('f'));
+
+        assertEquals(1, pp.getNumberFromChar('g'));
+        assertEquals(3, pp.getNumberFromChar('i'));
+
+        assertEquals(1, pp.getNumberFromChar('j'));
+        assertEquals(3, pp.getNumberFromChar('l'));
+
+        assertEquals(1, pp.getNumberFromChar('m'));
+        assertEquals(3, pp.getNumberFromChar('o'));
+
+        assertEquals(1, pp.getNumberFromChar('p'));
+        assertEquals(4, pp.getNumberFromChar('s'));
+
+        assertEquals(1, pp.getNumberFromChar('t'));
+        assertEquals(3, pp.getNumberFromChar('v'));
+
         assertEquals(1, pp.getNumberFromChar('w'));
         assertEquals(4, pp.getNumberFromChar('z'));
     }
 
     @Test
     public void getPressesFromString() throws Exception {
-        assertEquals(0, pp.getPressesFromString("a"));
+        assertEquals(13, pp.getPressesFromString("hello"));
     }
 }

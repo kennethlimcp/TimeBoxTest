@@ -6,25 +6,31 @@ package kennethlimcp.timeboxtest;
 
 public class PhonePad {
      public int getNumberFromChar(char input) {
-         int numericValue = (int) Character.toLowerCase(input) - 0x60;
+         int numericValue = (int) Character.toLowerCase(input) - 0x61;
 
 //        a to o
-        if(numericValue < 16)
+        if(numericValue < 15)
             numericValue = numericValue % 3;
 //        p to s
-        else if(numericValue < 20)
+        else if(numericValue < 19)
             numericValue = numericValue - 15;
 //        t to v
-        else if(numericValue < 23)
-            numericValue = numericValue - 20;
+        else if(numericValue < 22)
+            numericValue = numericValue - 19;
 //        w to z
          else
             numericValue = numericValue - 22;
 
-         return numericValue;
+         return numericValue + 1;
      }
 
      public int getPressesFromString(String s) {
-         return 0;
+         int presses = 0;
+
+         for(char c : s.toCharArray()) {
+             presses += getNumberFromChar(c);
+         }
+
+         return presses;
      }
 }
