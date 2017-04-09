@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -111,8 +112,34 @@ public class PhonePadTest {
     }
 
     @Test
-    public void TestGetWordCombisFromNum() {
-        assertArrayEquals(new String[]{"test"}, pp.getWordCombisFromNum("1234"));
+    public void TestGetWordCombisFromNum() throws Exception {
+        List<String> l1 = new LinkedList();
+        l1.add("p");
+        l1.add("q");
+        l1.add("r");
+        l1.add("s");
+
+        List l2 = pp.getWordCombisFromNum("7");
+
+        assertArrayEquals(l1.toArray(), l2.toArray());
+
+        List<String> l3 = new LinkedList();
+        l3.add("dw");
+        l3.add("dx");
+        l3.add("dy");
+        l3.add("dz");
+        l3.add("ew");
+        l3.add("ex");
+        l3.add("ey");
+        l3.add("ez");
+        l3.add("fw");
+        l3.add("fx");
+        l3.add("fy");
+        l3.add("fz");
+
+        List l4 = pp.getWordCombisFromNum("39");
+
+        assertArrayEquals(l3.toArray(), l4.toArray());
 
     }
 }

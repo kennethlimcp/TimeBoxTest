@@ -2,6 +2,8 @@ package kennethlimcp.timeboxtest;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,22 +12,6 @@ import java.util.List;
  */
 
 public class PhonePad {
-    private List<char[]> numberToCharList;
-
-    public PhonePad() {
-        numberToCharList = new LinkedList();
-
-        numberToCharList.add(0,new char[]{});
-        numberToCharList.add(1,new char[]{});
-        numberToCharList.add(2,new char[]{'a','b','c'});
-        numberToCharList.add(3,new char[]{'d','e','f'});
-        numberToCharList.add(4,new char[]{'g','h','i'});
-        numberToCharList.add(5,new char[]{'j','k','l'});
-        numberToCharList.add(6,new char[]{'m','n','o'});
-        numberToCharList.add(7,new char[]{'p','q','r','s'});
-        numberToCharList.add(8,new char[]{'t','u','v'});
-        numberToCharList.add(9,new char[]{'w','x','y','z'});
-    }
 
      public int getPressesFromChar(char input) {
          int numericValue = (int) Character.toLowerCase(input);
@@ -97,20 +83,33 @@ public class PhonePad {
          return returnValue;
      }
 
-     //TODO: uncompleted implementation
-     public String[] getWordCombisFromNum(String number) {
-         List<char[]> numArray = new LinkedList();
+    public List getWordCombisFromNum(String number) throws Exception {
+        String[] padLetters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
 
-         char[] charArray = number.toCharArray();
+        List<String> wordsList = new LinkedList();
+        wordsList.add("");
 
-         //get the sets of char for each number first
-         // (c - 0x30) to remove ascii offset of 0
-         for(char c: charArray) {
-             numArray.add(numberToCharList.get(c-0x30));
-         }
+        for(int i=0; i< number.length(); i++) {
+            //Our array starts at 0 so we have to offset by ascii '2'
+            int padNumber = number.charAt(i) - '2';
 
-         return new String[]{"test"};
-     }
+            if(padNumber < 0 || padNumber > 9) throw new InputMismatchException();
+
+            //check the number of prefix
+            int count = wordsList.size();
+
+            for(int j=0; j<count; j++) {
+                String prefix = wordsList.remove(0);
+
+                for(int k=0; k < padLetters[padNumber].length(); k++) {
+                    wordsList.add(prefix + padLetters[padNumber].charAt(k));
+                }
+            }
+        }
+
+        return wordsList;
+
+    }
 
 
      public List getPossibleWordsFromNum(String number) {
