@@ -116,6 +116,7 @@ public class PhonePad {
      public List getPossibleWordsFromNum(String number) {
          List<String> words = new LinkedList<String>();
 
+         //Path to be changed depending on environment
          String wordsFile = ("/Users/kennethlimcp/Desktop/" +
                  "TimeBoxTest/app/src/main/java/kennethlimcp/timeboxtest/words.txt");
          BufferedReader reader;
