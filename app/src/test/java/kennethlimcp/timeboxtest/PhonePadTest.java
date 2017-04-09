@@ -51,6 +51,18 @@ public class PhonePadTest {
 
     @Test
     public void getPressesFromString() throws Exception {
+        assertEquals(0, pp.getPressesFromString(""));
+        assertEquals(6, pp.getPressesFromString("abc"));
+        assertEquals(6, pp.getPressesFromString("def"));
+        assertEquals(6, pp.getPressesFromString("ghi"));
+        assertEquals(6, pp.getPressesFromString("jkl"));
+        assertEquals(6, pp.getPressesFromString("mno"));
+        assertEquals(10, pp.getPressesFromString("pqrs"));
+        assertEquals(6, pp.getPressesFromString("tuv"));
+        assertEquals(10, pp.getPressesFromString("wxyz"));
+
         assertEquals(13, pp.getPressesFromString("hello"));
+        assertEquals(10, pp.getPressesFromString("aaaaaaaaaa"));
+
     }
 }
