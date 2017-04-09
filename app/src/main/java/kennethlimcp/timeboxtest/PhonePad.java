@@ -33,4 +33,8 @@ public class PhonePad {
 
          return presses;
      }
+
+     public String getNumberRepOfWord(String s) {
+         return "test";
+     }
 }

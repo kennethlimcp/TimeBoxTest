@@ -50,7 +50,7 @@ public class PhonePadTest {
     }
 
     @Test
-    public void getPressesFromString() throws Exception {
+    public void getPressesFromString() {
         assertEquals(0, pp.getPressesFromString(""));
         assertEquals(6, pp.getPressesFromString("abc"));
         assertEquals(6, pp.getPressesFromString("def"));
@@ -64,5 +64,10 @@ public class PhonePadTest {
         assertEquals(13, pp.getPressesFromString("hello"));
         assertEquals(10, pp.getPressesFromString("aaaaaaaaaa"));
 
+    }
+
+    @Test
+    public void getNumberRepOfWord() {
+        assertEquals("test", pp.getNumberRepOfWord("test"));
     }
 }
