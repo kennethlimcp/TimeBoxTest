@@ -12,13 +12,17 @@ import java.util.List;
  */
 
 public class PhonePad {
+    public boolean charWithinRange(char input) {
+        if(Character.toLowerCase(input) < 'a' || Character.toLowerCase(input) > 'z')
+            return false;
+        else
+            return true;
+    }
 
     public int getPressesFromChar(char input) {
-        int numericValue = (int) Character.toLowerCase(input);
+        if(!charWithinRange(input)) return -1;
 
-        //check that it's a valid a-z char else return negative value
-        if(numericValue < 'a' || numericValue > 'z')
-            return -1;
+        int numericValue = (int) Character.toLowerCase(input);
 
         //offset from ascii 'a' to start from index 0
         numericValue = numericValue - 0x61;
@@ -43,9 +47,8 @@ public class PhonePad {
         int presses = 0;
 
         for(char c : s.toCharArray()) {
+            if(!charWithinRange(c)) return -1;
 
-            if((int)c < 'a' || numericValue > 'z')
-                return -1;
             presses += getPressesFromChar(c);
         }
 
@@ -58,12 +61,16 @@ public class PhonePad {
         String retStr = "";
 
         for(char c : s.toCharArray()) {
+            if(!charWithinRange(c)) return "";
+
             retStr += getNumberRepOfChar(c);
         }
         return retStr;
     }
 
     public int getNumberRepOfChar(char c) {
+        if(!charWithinRange(c)) return -1;
+
         int returnValue = 0;
 
         if(c <= 'c')
@@ -114,7 +121,7 @@ public class PhonePad {
     }
 
 
-    public List getPossibleWordsFromNum(String number) {
+    public List getWordsFromDictMatchingNum(String number) {
         List<String> words = new LinkedList<String>();
 
         //Path to be changed depending on environment

@@ -1,6 +1,7 @@
 package kennethlimcp.timeboxtest;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ import static org.junit.Assert.*;
  * Created by kennethlimcp on 09/Apr/2017.
  */
 public class PhonePadTest {
+
     private PhonePad pp;
 
     @Before
@@ -23,6 +25,15 @@ public class PhonePadTest {
     @After
     public void tearDown() {
         pp = null;
+    }
+    @Test
+    public void charWithinRange() throws Exception {
+        assertTrue(pp.charWithinRange('a'));
+        assertTrue(pp.charWithinRange('z'));
+        assertTrue(pp.charWithinRange('A'));
+        assertTrue(pp.charWithinRange('Z'));
+        assertFalse(pp.charWithinRange('1'));
+        assertFalse(pp.charWithinRange(')'));
     }
 
     @Test
@@ -56,6 +67,8 @@ public class PhonePadTest {
 
     @Test
     public void getPressesFromString() {
+        assertEquals(-1, pp.getPressesFromString("A-A"));
+
         assertEquals(0, pp.getPressesFromString(""));
         assertEquals(6, pp.getPressesFromString("abc"));
         assertEquals(6, pp.getPressesFromString("def"));
@@ -69,6 +82,7 @@ public class PhonePadTest {
         assertEquals(13, pp.getPressesFromString("hello"));
         assertEquals(10, pp.getPressesFromString("aaaaaaaaaa"));
 
+        assertEquals(4, pp.getPressesFromString("ADGJ"));
     }
 
     @Test
@@ -81,24 +95,28 @@ public class PhonePadTest {
         assertEquals(7, pp.getNumberRepOfChar('s'));
         assertEquals(8, pp.getNumberRepOfChar('v'));
         assertEquals(9, pp.getNumberRepOfChar('z'));
+
+        assertEquals(-1, pp.getNumberRepOfChar('!'));
     }
 
     @Test
     public void getNumberRepOfWord() {
         assertEquals("43556", pp.getNumberRepOfWord("hello"));
         assertEquals("23456789", pp.getNumberRepOfWord("behknruy"));
-        assertEquals("9", pp.getNumberRepOfWord("Z"));
+        assertEquals("239", pp.getNumberRepOfWord("ADZ"));
+
+        assertEquals("", pp.getNumberRepOfWord("!@#"));
     }
 
     @Test
     public void testGetPossibleWordsFromNum() {
-        List l1 = pp.getPossibleWordsFromNum("2355");
+        List l1 = pp.getWordsFromDictMatchingNum("2355");
 
         assertEquals(2, l1.size());
         assertTrue("bell",l1.contains("bell"));
         assertTrue("cell",l1.contains("cell"));
 
-        List l2 = pp.getPossibleWordsFromNum("2");
+        List l2 = pp.getWordsFromDictMatchingNum("2");
         assertEquals(6, l2.size());
         assertTrue("A",l2.contains("A"));
         assertTrue("a",l2.contains("a"));
@@ -107,7 +125,7 @@ public class PhonePadTest {
         assertTrue("C",l2.contains("C"));
         assertTrue("c",l2.contains("c"));
 
-        List l3 = pp.getPossibleWordsFromNum("0");
+        List l3 = pp.getWordsFromDictMatchingNum("0");
         assertEquals(0, l3.size());
     }
 
