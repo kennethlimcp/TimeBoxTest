@@ -5,7 +5,7 @@ package kennethlimcp.timeboxtest;
  */
 
 public class PhonePad {
-     public int getNumberFromChar(char input) {
+     public int getPressesFromChar(char input) {
          int numericValue = (int) Character.toLowerCase(input) - 0x61;
 
 //        a to o
@@ -28,7 +28,7 @@ public class PhonePad {
          int presses = 0;
 
          for(char c : s.toCharArray()) {
-             presses += getNumberFromChar(c);
+             presses += getPressesFromChar(c);
          }
 
          return presses;
