@@ -159,5 +159,8 @@ public class PhonePadTest {
 
         assertArrayEquals(l3.toArray(), l4.toArray());
 
+        List l5 = pp.getWordCombisFromNum("23456789");
+        assertEquals(3*3*3*3*3*4*3*4, l5.size());
+
     }
 }
