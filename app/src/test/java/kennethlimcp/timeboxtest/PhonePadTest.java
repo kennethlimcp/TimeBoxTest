@@ -49,6 +49,8 @@ public class PhonePadTest {
 
         assertEquals(1, pp.getPressesFromChar('w'));
         assertEquals(4, pp.getPressesFromChar('z'));
+
+        assertEquals(-1, pp.getPressesFromChar('1'));
     }
 
     @Test
@@ -106,5 +108,11 @@ public class PhonePadTest {
 
         List l3 = pp.getPossibleWordsFromNum("0");
         assertEquals(0, l3.size());
+    }
+
+    @Test
+    public void TestGetWordCombisFromNum() {
+        assertArrayEquals(new String[]{"test"}, pp.getWordCombisFromNum("1234"));
+
     }
 }

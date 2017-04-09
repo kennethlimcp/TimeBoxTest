@@ -28,18 +28,25 @@ public class PhonePad {
     }
 
      public int getPressesFromChar(char input) {
-         int numericValue = (int) Character.toLowerCase(input) - 0x61;
+         int numericValue = (int) Character.toLowerCase(input);
 
-//        a to o
+         //check that it's a valid a-z char else return negative value
+         if(numericValue < 0x61 || numericValue > 0x7A)
+             return -1;
+
+         //offset from ascii 'a' to start from index 0
+         numericValue = numericValue - 0x61;
+
+        //a to o
         if(numericValue < 15)
             numericValue = numericValue % 3;
-//        p to s
+        //p to s
         else if(numericValue < 19)
             numericValue = numericValue - 15;
-//        t to v
+        //t to v
         else if(numericValue < 22)
             numericValue = numericValue - 19;
-//        w to z
+        //w to z
          else
             numericValue = numericValue - 22;
 
@@ -90,15 +97,19 @@ public class PhonePad {
          return returnValue;
      }
 
+     //TODO: uncompleted implementation
      public String[] getWordCombisFromNum(String number) {
          List<char[]> numArray = new LinkedList();
 
+         char[] charArray = number.toCharArray();
+
+         //get the sets of char for each number first
          // (c - 0x30) to remove ascii offset of 0
-         for(char c: number.toCharArray()) {
+         for(char c: charArray) {
              numArray.add(numberToCharList.get(c-0x30));
          }
 
-         return new String[]{};
+         return new String[]{"test"};
      }
 
 
