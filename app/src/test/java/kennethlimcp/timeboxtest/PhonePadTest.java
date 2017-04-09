@@ -17,7 +17,7 @@ public class PhonePadTest {
 
     @Before
     public void setUp() {
-         pp = new PhonePad();
+        pp = new PhonePad();
     }
 
     @After

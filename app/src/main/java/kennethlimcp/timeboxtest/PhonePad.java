@@ -13,75 +13,78 @@ import java.util.List;
 
 public class PhonePad {
 
-     public int getPressesFromChar(char input) {
-         int numericValue = (int) Character.toLowerCase(input);
+    public int getPressesFromChar(char input) {
+        int numericValue = (int) Character.toLowerCase(input);
 
-         //check that it's a valid a-z char else return negative value
-         if(numericValue < 0x61 || numericValue > 0x7A)
-             return -1;
+        //check that it's a valid a-z char else return negative value
+        if(numericValue < 'a' || numericValue > 'z')
+            return -1;
 
-         //offset from ascii 'a' to start from index 0
-         numericValue = numericValue - 0x61;
+        //offset from ascii 'a' to start from index 0
+        numericValue = numericValue - 0x61;
 
         //a to o
         if(numericValue < 15)
             numericValue = numericValue % 3;
-        //p to s
+            //p to s
         else if(numericValue < 19)
             numericValue = numericValue - 15;
-        //t to v
+            //t to v
         else if(numericValue < 22)
             numericValue = numericValue - 19;
-        //w to z
-         else
+            //w to z
+        else
             numericValue = numericValue - 22;
 
-         return numericValue + 1;
-     }
+        return numericValue + 1;
+    }
 
-     public int getPressesFromString(String s) {
-         int presses = 0;
+    public int getPressesFromString(String s) {
+        int presses = 0;
 
-         for(char c : s.toCharArray()) {
-             presses += getPressesFromChar(c);
-         }
+        for(char c : s.toCharArray()) {
 
-         return presses;
-     }
+            if((int)c < 'a' || numericValue > 'z')
+                return -1;
+            presses += getPressesFromChar(c);
+        }
 
-     public String getNumberRepOfWord(String s) {
-         s = s.toLowerCase();
+        return presses;
+    }
 
-         String retStr = "";
+    public String getNumberRepOfWord(String s) {
+        s = s.toLowerCase();
 
-         for(char c : s.toCharArray()) {
-             retStr += getNumberRepOfChar(c);
-         }
-         return retStr;
-     }
+        String retStr = "";
 
-     public int getNumberRepOfChar(char c) {
-         int returnValue = 0;
+        for(char c : s.toCharArray()) {
+            retStr += getNumberRepOfChar(c);
+        }
+        return retStr;
+    }
 
-         if(c <= 'c')
-             returnValue = 2;
-         else if (c <= 'f')
-             returnValue = 3;
-         else if (c <= 'i')
-             returnValue = 4;
-         else if (c <= 'l')
-             returnValue = 5;
-         else if (c <= 'o')
-             returnValue = 6;
-         else if (c <= 's')
-             returnValue = 7;
-         else if (c <= 'v')
-             returnValue = 8;
-         else if (c <= 'z')
-             returnValue = 9;
+    public int getNumberRepOfChar(char c) {
+        int returnValue = 0;
 
-         return returnValue;
-     }
+        if(c <= 'c')
+            returnValue = 2;
+        else if (c <= 'f')
+            returnValue = 3;
+        else if (c <= 'i')
+            returnValue = 4;
+        else if (c <= 'l')
+            returnValue = 5;
+        else if (c <= 'o')
+            returnValue = 6;
+        else if (c <= 's')
+            returnValue = 7;
+        else if (c <= 'v')
+            returnValue = 8;
+        else if (c <= 'z')
+            returnValue = 9;
+
+        return returnValue;
+    }
 
     public List getWordCombisFromNum(String number) throws Exception {
         String[] padLetters = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
@@ -108,35 +111,34 @@ public class PhonePad {
         }
 
         return wordsList;
-
     }
 
 
-     public List getPossibleWordsFromNum(String number) {
-         List<String> words = new LinkedList<String>();
+    public List getPossibleWordsFromNum(String number) {
+        List<String> words = new LinkedList<String>();
 
-         //Path to be changed depending on environment
-         String wordsFile = ("/Users/kennethlimcp/Desktop/" +
-                 "TimeBoxTest/app/src/main/java/kennethlimcp/timeboxtest/words.txt");
-         BufferedReader reader;
-         FileReader fr;
-         String word = "";
+        //Path to be changed depending on environment
+        String wordsFile = ("/Users/kennethlimcp/Desktop/" +
+                "TimeBoxTest/app/src/main/java/kennethlimcp/timeboxtest/words.txt");
+        BufferedReader reader;
+        FileReader fr;
+        String word = "";
 
-         try {
-             fr = new FileReader(wordsFile);
-             reader = new BufferedReader(fr);
+        try {
+            fr = new FileReader(wordsFile);
+            reader = new BufferedReader(fr);
 
-             while ((word = reader.readLine()) != null) {
-                 if(number.equals(getNumberRepOfWord(word))) {
-                     words.add(word);
-                 }
-             }
-             fr.close();
+            while ((word = reader.readLine()) != null) {
+                if(number.equals(getNumberRepOfWord(word))) {
+                    words.add(word);
+                }
+            }
+            fr.close();
 
-         } catch (Exception e) {
-             e.printStackTrace();
-         }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-         return words;
-     }
+        return words;
+    }
 }
