@@ -67,7 +67,20 @@ public class PhonePadTest {
     }
 
     @Test
+    public void getNumberRepOfChar() {
+        assertEquals(2, pp.getNumberRepOfChar('c'));
+        assertEquals(3, pp.getNumberRepOfChar('f'));
+        assertEquals(4, pp.getNumberRepOfChar('i'));
+        assertEquals(5, pp.getNumberRepOfChar('l'));
+        assertEquals(6, pp.getNumberRepOfChar('o'));
+        assertEquals(7, pp.getNumberRepOfChar('s'));
+        assertEquals(8, pp.getNumberRepOfChar('v'));
+        assertEquals(9, pp.getNumberRepOfChar('z'));
+    }
+
+    @Test
     public void getNumberRepOfWord() {
-        assertEquals("test", pp.getNumberRepOfWord("test"));
+        assertEquals("43556", pp.getNumberRepOfWord("hello"));
+        assertEquals("23456789", pp.getNumberRepOfWord("behknruy"));
     }
 }

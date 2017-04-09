@@ -35,6 +35,34 @@ public class PhonePad {
      }
 
      public String getNumberRepOfWord(String s) {
-         return "test";
+         String retStr = "";
+
+         for(char c : s.toCharArray()) {
+             retStr += getNumberRepOfChar(c);
+         }
+         return retStr;
+     }
+
+     public int getNumberRepOfChar(char c) {
+         int returnValue = 0;
+
+         if(c <= 'c')
+             returnValue = 2;
+         else if (c <= 'f')
+             returnValue = 3;
+         else if (c <= 'i')
+             returnValue = 4;
+         else if (c <= 'l')
+             returnValue = 5;
+         else if (c <= 'o')
+             returnValue = 6;
+         else if (c <= 's')
+             returnValue = 7;
+         else if (c <= 'v')
+             returnValue = 8;
+         else if (c <= 'z')
+             returnValue = 9;
+
+         return returnValue;
      }
 }
