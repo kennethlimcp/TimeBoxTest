@@ -23,4 +23,8 @@ public class PhonePad {
 
          return numericValue;
      }
+
+     public int getPressesFromString(String s) {
+         return 0;
+     }
 }
